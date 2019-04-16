@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:85:"D:\WWW\xuexi\18_News\Day_06\code\tp5\public/../application/index\view\user\login.html";i:1529373312;s:76:"D:\WWW\xuexi\18_News\Day_06\code\tp5\application\index\view\public\base.html";i:1529545004;s:78:"D:\WWW\xuexi\18_News\Day_06\code\tp5\application\index\view\public\header.html";i:1530062966;s:78:"D:\WWW\xuexi\18_News\Day_06\code\tp5\application\index\view\public\footer.html";i:1552117644;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:85:"D:\WWW\xuexi\18_News\Day_06\code\tp5\public/../application/index\view\user\login.html";i:1555400129;s:76:"D:\WWW\xuexi\18_News\Day_06\code\tp5\application\index\view\public\base.html";i:1529545004;s:78:"D:\WWW\xuexi\18_News\Day_06\code\tp5\application\index\view\public\header.html";i:1530062966;s:78:"D:\WWW\xuexi\18_News\Day_06\code\tp5\application\index\view\public\footer.html";i:1552117644;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -105,7 +105,7 @@
         <input type="text" name="captcha" value="" class="form-control">
       </div>
       <div class="col-md-5">
-        <img src="<?php echo captcha_src(); ?>" alt="captcha" id="captcha" />
+        <img src="<?php echo aptcha_src(); ?>" alt="captcha" id="captcha" />
       </div>
     </div>
 

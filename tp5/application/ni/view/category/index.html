@@ -1,0 +1,28 @@
+{{extend name="public/base"}}
+
+{{block name="main"}}
+<h2 class="page-header">分类列表</h2>
+<div class="row table-responsive">
+	<table class="table table-condensed table-hover table-bordered table-striped">
+		<tr>
+			<th>ID</th>
+			<th>分类名称</th>
+			<th>是否推荐</th>
+			<th>创建时间</th>
+			<th>操作菜单</th>
+		</tr>
+		{{volist name="cs" id="vo"}}
+		<tr>
+			<td>{{$vo.id}}</td>
+			<td>{{:str_repeat('--', $vo.level)}} {{$vo.title}}</td>
+			<td>{{$vo.recommend}}</td>
+			<td>{{$vo.created}}</td>
+			<td>
+				<a href="{{:url('index/category/index',['cid'=>$vo.id])}}" class="btn btn-success" target="_blank">查看</a>
+				<a href="{{:url('ni/category/edit',['id' => $vo.id])}}" class="btn btn-primary">编辑</a>
+			</td>
+		</tr>
+		{{/volist}}
+	</table>
+</div>
+{{/block}}

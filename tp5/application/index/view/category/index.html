@@ -1,0 +1,63 @@
+{{extend name="public/base"}}
+
+{{block name="main"}}
+<div class="col-md-8">
+  <div id="slide" class="carousel slide" style="width: 100%;height: 300px;" data-ride="carousel">
+    <ol class="carousel-indicators">
+    	{{volist name="slide" id="vo"}}
+      <li data-target="#slide" data-slide-to="{{$key}}" {{if condition="$key == 0"}}class="active"{{/if}}></li>
+        {{/volist}}
+    </ol>
+    <div class="carousel-inner" role="listbox">
+    	{{volist name="slide" id="vo"}}
+      <div class="item {{if condition="$key == 0"}}active{{/if}}">
+      	<a href="{{:url('index/news/view',['id' => $vo.id])}}">
+        <img src="__STATIC__/upload/{{$vo.image}}" style="width: 100%; height: 300px" alt="{{$vo.title}}">
+        </a>
+      </div>
+      	{{/volist}}
+    </div>
+    <a class="left carousel-control" href="#slide" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">上一个</span>
+    </a>
+    <a class="right carousel-control" href="#slide" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">下一个</span>
+    </a>
+  </div>
+</div>
+<div class="col-md-4">
+	<div class="panel panel-primary">
+		<div class="panel-body" style="padding: 0;">
+			<ul class="list-group" style="margin-bottom: 10px;">
+				{{volist name="recommend" id="vo" empty="暂时没有内容"}}
+				<li class="list-group-item">
+					<a href="{{:url('index/news/view',['id'=>$vo.id])}}">{{$vo.title|mb_substr=0,15}}</a>
+				</li>
+				{{/volist}}
+			</ul>
+		</div>
+	</div>
+</div>
+
+{{volist name="subs" id="vo"}}
+<div class="col-md-6">
+	<div class="panel panel-info" style="height: 320px;">
+		<div class="panel-heading">
+			<a href="{{:url('index/category/index',['cid' =>$vo.id])}}">{{$vo.title}}</a>
+		</div>
+		<div class="panel-body" style="padding: 0;">
+		 <ul class="list-group" style="margin-bottom: 0;">
+		 	{{volist name="news[$vo.id]" id="vvo" empty="暂时没有内容"}}
+		 	<li class="list-group-item">
+		 		<a href="{{:url('index/news/view',['id'=>$vvo.id])}}">{{$vvo.title}}</a>
+		 	</li>
+		 	{{/volist}}
+		 </ul>
+		</div>
+	</div>
+</div>
+{{/volist}}
+
+{{/block}}

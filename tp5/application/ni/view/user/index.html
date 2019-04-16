@@ -1,0 +1,56 @@
+{{extend name="public/base"}}
+
+{{block name="main"}}
+<div class="row">
+<h2 class="page-header">用户列表</h2>
+
+<form action="#" id="searchForm" class="form-inline">
+    <input type="text" name="username" value="{{$Think.get.username ? $Think.get.username : ''}}" class="form-control" placeholder="用户名">
+    <input type="text" name="phone" value="{{$Think.get.phone ? $Think.get.phone : ''}}" class="form-control" placeholder="手机号">
+    <input type="text" name="email" value="{{$Think.get.email ? $Think.get.email : ''}}" class="form-control" placeholder="邮箱">
+    <button class="btn btn-primary" id="doSearch"><span class="glyphicon glyphicon-search"></span></button>
+</form>
+</div>
+
+<div class="row table-responsive">
+	<table class="table table-condensed table-hover table-bordered table-striped">
+		<tr>
+			<th>ID</th>
+			<th>用户名</th>
+			<th>邮箱</th>
+			<th>手机号</th>
+			<th>余额</th>
+			<th>创建时间</th>
+			<th>操作菜单</th>
+		</tr>
+		{{volist name="list" id="vo"}}
+		<tr>
+			<td>{{$vo.id}}</td>
+			<td>{{$vo.username}}</td>
+			<td>{{$vo.email}}</td>
+			<td>{{$vo.phone}}</td>
+			<td>{{$vo.balance}}</td>
+			<td>{{$vo.created}}</td>
+			<td>
+				<a href="#" class="btn btn-success" target="_blank">查看</a>
+				<a href="#" class="btn btn-primary">编辑</a>
+				<a href="#" class="btn btn-danger">删除</a>
+			</td>
+		</tr>
+		{{/volist}}
+		
+	</table>
+	{{$list->render()}}
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script type="text/javascript">
+	$('#doSearch').click(function(){
+		var query = $('#searchForm').serialize();
+		console.log(query);
+		location.href = location.pathname+'?'+query;
+	});
+
+</script>
+{{/block}}

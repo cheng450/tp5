@@ -1,0 +1,80 @@
+{{extend name="public/base"}}
+
+{{block name="main"}}
+<h2 class="page-header">评论列表</h2>
+
+<div id="searchForm" class="form-inline">
+    <input type="text" name="content" value="{{:input('param.content')}}" class="form-control" placeholder="评论内容">
+    <input type="text" name="comment_type" value="{{:input('param.comment_type')}}" class="form-control" placeholder="评论类型">
+
+    <button class="btn btn-primary" id="doSearch"><span class="glyphicon glyphicon-search"></span></button>
+</div>
+
+<div class="row table-responsive">
+	<table class="table table-condensed table-hover table-bordered table-striped">
+		<tr>
+			<th>ID</th>
+			<th>作者</th>
+			<th>评论内容</th>
+			<th>评论主体</th>
+			<th>评论类型</th>
+			<th>创建时间</th>
+			<th>操作菜单</th>
+		</tr>
+		{{volist name="list" id="vo"}}
+		<tr>
+			<td>{{$vo.id}}</td>
+			<td>{{$vo->author->username}}</td>
+			<td>{{$vo.content}}</td>
+			<td>{{$vo.comment_id}}</td>
+			<td>{{$vo.comment_type}}</td>
+			<td>{{$vo.created}}</td>
+			<td>
+				<a href="{{:url('ni/comment/delete',['id'=>$vo.id])}}" class="btn btn-danger" onclick="return confirm('是否确认删除');">删除</a>
+			</td>
+		</tr>
+		{{/volist}}
+		
+	</table>
+	{{$list->render()}}
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script type="text/javascript">
+	$('#doSearch').click(function(){
+		var query = $('#searchForm').find("input").serialize();
+
+		// $("#comment_type").val();
+
+		var args = query.split("&");
+		// console.log(args);
+		var target = "";
+		for (var i=0; i<args.length; i++) {
+			var arg = args[i].split("=");
+			if (arg[1] != "") {
+				target += "/"+arg[0]+"/"+arg[1];
+			}
+		}
+		// console.log(target);
+
+		location.href = "{{:url('ni/comment/index')}}".replace(".html","")+target;
+
+
+		// console.log(query.replace("=","/"));
+		// console.log(query.replace(/=|&/g,"/"));
+
+		// content/2/comment_type/e
+		// var args = query.replace(/=|&/g,"/");
+
+		// admin/comment/index.html
+		// admin/comment/index/content/2/....
+        // var path = "{{:url('ni/comment/index')}}".replace(".html","");
+        // console.log(path+"/"+args);
+		// 将当前加上查询参数,然后执行跳转
+		// console.log(location.pathname+"?"+query);
+		// admin/news/index.html?title=体育
+		// location.href = path+"/"+args;
+	});
+</script>
+{{/block}}

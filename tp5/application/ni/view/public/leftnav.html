@@ -1,0 +1,99 @@
+<div class="panel-group" id="group">
+
+  <div class="panel {{if condition="$Request.controller == 'Blog'"}}panel-success{{else /}}panel-default{{/if}}">
+    <div class="panel-heading">
+      <a href="#blog" data-toggle="collapse" data-parent="#group">
+        <h4 class="panel-title">博客管理</h4>
+      </a>
+    </div>
+    <div class="collapse {{if condition="$Request.controller == 'Blog'"}}in{{/if}} panel-collapse" id="blog">
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="{{:url('ni/blog/index')}}">博客列表</a>
+          </li>
+          <li class="list-group-item">
+            <a href="{{:url('ni/blog/add')}}">添加博客</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel {{if condition="$Request.controller == 'Category'"}}panel-success{{else /}}panel-default{{/if}}">
+    <div class="panel-heading">
+      <a href="#category" data-toggle="collapse" data-parent="#group">
+      <h4 class="panel-title">分类管理</h4>
+      </a>
+    </div>
+    <div class="collapse {{if condition="$Request.controller == 'Category'"}}in{{/if}} panel-collapse" id="category">
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="{{:url('ni/category/index')}}">分类列表</a>
+          </li>
+          <li class="list-group-item">
+            <a href="{{:url('ni/category/add')}}">添加分类</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel {{if condition="$Request.controller == 'News'"}}panel-success{{else /}}panel-default{{/if}}">
+    <div class="panel-heading">
+      <a href="#news" data-toggle="collapse" data-parent="#group">
+      <h4 class="panel-title">新闻管理</h4>
+      </a>
+    </div>
+    <div class="collapse {{if condition="$Request.controller == 'News'"}}in{{/if}} panel-collapse" id="news">
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="{{:url('ni/news/index')}}">新闻列表</a>
+          </li>
+          <li class="list-group-item">
+            <a href="{{:url('ni/news/add')}}">添加新闻</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel {{if condition="$Request.controller == 'User'"}}panel-success{{else /}}panel-default{{/if}}">
+    <div class="panel-heading">
+      <a href="#user" data-toggle="collapse" data-parent="#group">
+      <h4 class="panel-title">用户管理</h4>
+      </a>
+    </div>
+    <div class="collapse {{if condition="$Request.controller == 'User'"}}in{{/if}} panel-collapse" id="user">
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="{{:url('ni/user/index')}}">用户列表</a>
+          </li>
+          <li class="list-group-item">
+            <a href="{{:url('ni/user/add')}}">添加管理员</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel {{if condition="$Request.controller == 'Comment'"}}panel-success{{else /}}panel-default{{/if}}">
+    <div class="panel-heading">
+      <a href="#comment" data-toggle="collapse" data-parent="#group">
+      <h4 class="panel-title">评论管理</h4>
+      </a>
+    </div>
+    <div class="collapse {{if condition="$Request.controller == 'Comment'"}}in{{/if}} panel-collapse" id="comment">
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="{{:url('ni/comment/index')}}">评论列表</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

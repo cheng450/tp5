@@ -1,0 +1,65 @@
+{{extend name="public/base"}}
+
+{{block name="main"}}
+<div class="col-md-8">
+  <div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			{{$data.title}}
+		</h3>
+	</div>
+	<div class="panel-body">
+		{{if condition="$data['image']"}}
+		<img src="__STATIC__/upload/{{$data.image}}" class="img-responsive">
+		{{/if}}
+		{{$data.content|nl2br}}
+	</div>
+	<div class="panel-footer">
+		作者:{{$data->author->username}} 创建时间: {{$data.created}} 浏览量:({{$data.views}})
+	</div>
+  </div>
+
+  {{// 添加评论表单 }}
+  <div class="panel panel-primary">
+  	<div class="panel-heading">添加评论</div>
+  	<div class="panel-body">
+  		{{if condition="$Think.session.user.id"}}
+		<form action="{{:url('index/comment/add')}}" method="post" class="form-inline">
+			<div class="form-group">
+				<input type="text" name="content" value="" class="form-control" placeholder="请输入评论内容" >
+			</div>
+			<div class="form-group">
+				<input type="hidden" name="comment_id" value="{{$data.id}}">
+				<input type="hidden" name="comment_type" value="{{$data:getName()}}">
+				<input type="hidden" name="uid" value="{{$Think.session.user.id}}">
+				<input type="submit" value="添加" class="btn btn-primary">
+			</div>
+		</form>
+  		{{else /}}
+		<a href="{{:url('index/user/login')}}" class="btn btn-success">登录</a>
+		<a href="{{:url('index/user/register')}}" class="btn btn-info">注册</a>
+  		{{/if}}
+  	</div>
+  </div>
+
+  {{// 展示当前博客的评论 }}
+  {{volist name="comments" id="vo"}}
+  <div class="panel panel-info">
+	<div class="panel-body">
+		{{$vo.content}}
+	</div>
+	<div class="panel-footer">
+		作者: {{$vo->author->username}} 评论时间: {{$vo.created}}
+	</div>
+  </div>
+  {{/volist}}
+  {{$comments->render()}}
+</div>
+{{/block}}
+{{block name="right"}}
+<div class="col-md-4">
+	{{include file="blog/right"}}
+</div>
+{{/block}}
+		
+

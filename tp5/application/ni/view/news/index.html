@@ -1,0 +1,54 @@
+{{extend name="public/base"}}
+
+{{block name="main"}}
+<h2 class="page-header">新闻列表</h2>
+
+<form action="#" id="searchForm" class="form-inline">
+    <input type="text" name="title" value="{{$Think.get.title ? $Think.get.title : ''}}" class="form-control" placeholder="新闻标题">
+    <a href="javascript:;" class="btn btn-primary" id="doSearch">搜索</a>
+</form>
+
+<div class="row table-responsive">
+	<table class="table table-condensed table-hover table-bordered table-striped">
+		<tr>
+			<th>ID</th>
+			<th>作者</th>
+			<th>所属分类</th>
+			<th>标题</th>
+			<th>浏览量</th>
+			<th>创建时间</th>
+			<th>操作菜单</th>
+		</tr>
+		{{volist name="list" id="vo"}}
+		<tr>
+			<td>{{$vo.id}}</td>
+			<td>{{$vo->author->username}}</td>
+			<td>{{$vo->category->title}}</td>
+			<td>{{$vo.title}}</td>
+			<td>{{$vo.views}}</td>
+			<td>{{$vo.created}}</td>
+			<td>
+				<a href="{{:url('index/news/view',['id' => $vo.id])}}" class="btn btn-success" target="_blank">查看</a>
+				<a href="{{:url('ni/news/edit',['id'=>$vo.id])}}" class="btn btn-primary">编辑</a>
+				<a href="{{:url('ni/news/delete',['id'=>$vo.id])}}" onclick="return confirm('是否确认删除?')" class="btn btn-danger">删除</a>
+			</td>
+		</tr>
+		{{/volist}}
+		
+	</table>
+	{{$list->render()}}
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script type="text/javascript">
+	$('#doSearch').click(function(){
+		var query = $('#searchForm').serialize();
+		console.log(query);
+		// 将当前加上查询参数,然后执行跳转
+		console.log(location.pathname+"?"+query);
+		// admin/news/index.html?title=体育
+		location.href = location.pathname+"?"+query
+	});
+</script>
+{{/block}}
